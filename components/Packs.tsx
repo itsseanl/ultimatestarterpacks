@@ -34,12 +34,21 @@ const Packs = ({ data }) => {
 
 	const handleKeyDown = (e) => {
 		setSearch(e.target.value);
-		if (e.keyCode == "13") {
-			console.log("Search");
-		}
 	};
+
 	const handleCatClick = (elem, e) => {
+		allSearch.current.classList.remove("selected");
+		lifestyleSearch.current.classList.remove("selected");
+		activitySearch.current.classList.remove("selected");
+		cookingSearch.current.classList.remove("selected");
+		noveltySearch.current.classList.remove("selected");
+
 		elem.current.classList.add("selected");
+		if (elem.current.innerHTML == "All") {
+			setSearch("");
+		} else {
+			setSearch(elem.current.innerHTML);
+		}
 	};
 
 	console.log(search);
@@ -51,22 +60,34 @@ const Packs = ({ data }) => {
 			<div className="custom-wrapper categories">
 				<ul>
 					<li
-						onClick={(e) => handleCatClick}
+						onClick={(e) => handleCatClick(allSearch, e)}
 						className="selected"
 						ref={allSearch}
 					>
 						All
 					</li>
-					<li onClick={(e) => handleCatClick(this, e)} ref={lifestyleSearch}>
+					<li
+						onClick={(e) => handleCatClick(lifestyleSearch, e)}
+						ref={lifestyleSearch}
+					>
 						Lifestyle
 					</li>
-					<li onClick={(e) => handleCatClick(this, e)} ref={activitySearch}>
+					<li
+						onClick={(e) => handleCatClick(activitySearch, e)}
+						ref={activitySearch}
+					>
 						Activities
 					</li>
-					<li onClick={(e) => handleCatClick(this, e)} ref={cookingSearch}>
+					<li
+						onClick={(e) => handleCatClick(cookingSearch, e)}
+						ref={cookingSearch}
+					>
 						Cooking
 					</li>
-					<li onClick={(e) => handleCatClick(this, e)} ref={noveltySearch}>
+					<li
+						onClick={(e) => handleCatClick(noveltySearch, e)}
+						ref={noveltySearch}
+					>
 						Novelty
 					</li>
 				</ul>
