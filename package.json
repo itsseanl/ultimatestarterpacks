@@ -1,0 +1,27 @@
+{
+	"name": "ultimatestarterpacks",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"dev": "next",
+		"build": "next build",
+		"start": "next start"
+	},
+	"dependencies": {
+		"dotenv": "^8.2.0",
+		"isomorphic-unfetch": "^3.0.0",
+		"mongodb": "^3.5.6",
+		"next": "^9.3.5",
+		"next-connect": "^0.6.4",
+		"now": "^18.0.0",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
+		"react-icons": "^3.10.0"
+	},
+	"devDependencies": {
+		"@types/node": "^13.13.0",
+		"@types/react": "^16.9.34",
+		"typescript": "^3.8.3"
+	}
+}
