@@ -5,8 +5,8 @@ const handler = nextConnect();
 handler.use(middleware);
 
 handler.get(async (req, res) => {
+	console.log("request" + req);
 	let doc = await req.db.collection("packs").find().toArray();
-	console.log(doc);
 	res.json(doc);
 });
 

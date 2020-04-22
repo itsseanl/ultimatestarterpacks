@@ -51,7 +51,6 @@ const Packs = ({ data }) => {
 		}
 	};
 
-	console.log(search);
 	return (
 		<>
 			<div className="custom-wrapper search">
