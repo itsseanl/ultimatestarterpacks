@@ -4,10 +4,11 @@ const uri = `mongodb+srv://admin:${process.env.mongo_pw}@usp-hl1eo.mongodb.net/t
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
 async function database(req, res, next) {
-	if (!client.isConnected()) await client.connect();
-	req.dbClient = client;
-	req.db = client.db("USP");
-	return next();
+  if (!client.isConnected()) await client.connect();
+
+  req.dbClient = client;
+  req.db = client.db("USP");
+  return next();
 }
 
 const middleware = nextConnect();
