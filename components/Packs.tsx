@@ -1,6 +1,10 @@
-import react, { useState, useEffect, useRef } from "react";
+import react, { useState, useEffect, useRef, createRef } from "react";
 import { IconContext } from "react-icons/lib";
 import { FaHeart } from "react-icons/fa";
+import React from "react";
+import { readFileSync } from "fs";
+
+import Pack from "./Pack";
 
 const Packs = ({ data }) => {
   const [shown, setShown] = useState(data);
@@ -18,7 +22,7 @@ const Packs = ({ data }) => {
     } else {
       let splitSearch = search.split(" ");
       let newShown = [];
-      shown.map(pack => {
+      shown.map((pack, i) => {
         let objectToStr = `${pack.title} ${pack.category} ${pack.body}`;
         objectToStr.toLowerCase;
         for (let i = 0; i < splitSearch.length; i++) {
@@ -28,6 +32,7 @@ const Packs = ({ data }) => {
           }
         }
       });
+
       setShown(newShown);
     }
   }, [search]);
@@ -48,24 +53,6 @@ const Packs = ({ data }) => {
       setSearch("");
     } else {
       setSearch(elem.current.innerHTML);
-    }
-  };
-
-  const handleLike = async (title, likes) => {
-    const data = { title: title, likes: likes };
-    try {
-      const res = await fetch("/api/like", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "content-type": "application/json"
-        }
-      });
-
-      const json = await res.json();
-      console.log(json);
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -110,51 +97,11 @@ const Packs = ({ data }) => {
         </ul>
       </div>
       <div className="custom-wrapper packs">
-        {shown.map(pack => {
-          return (
-            <div className="pack" data-cat={pack.category}>
-              <img src={"." + pack.images[0]} />
-              <div className="info">
-                <div className="title">
-                  <div className="left">
-                    <h2>{pack.title}</h2>
-                  </div>
-                  <div className="right">
-                    <p>{pack.likes}</p>
-                    <div
-                      className="likes"
-                      onClick={e => handleLike(pack.title, pack.likes)}
-                    >
-                      <FaHeart />
-                    </div>
-                  </div>
-                </div>
-                <a href={"/pack/" + pack.title}>View</a>
-                <a href="">Add to Amazon Cart</a>
-              </div>
-            </div>
-          );
+        {shown.map((pack, index) => {
+          return <Pack data={pack} />;
         })}
       </div>
       <style jsx>{`
-        .title {
-          width: 100%;
-          display: flex;
-          justify-content: space-between;
-        }
-        .left {
-          display: flex;
-          justify-content: flex-start;
-        }
-        .right {
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
-        }
-        .right :global(svg) {
-          font-size: 18px;
-          margin-left: 15px;
-        }
         input {
           display: block;
           left: 0;
@@ -195,47 +142,7 @@ const Packs = ({ data }) => {
         .packs {
           display: grid;
         }
-        .pack {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          margin: 30px auto;
-          padding: 30px 10px;
-          box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.3);
-          border-radius: 25px;
-          max-width: 400px;
-          width: 90%;
-          transition: 0.3s all;
-        }
-        .pack img {
-          width: 90%;
-          height: auto;
-        }
-        .info a {
-          text-decoration: none;
-          padding: 5px;
-          background-color: #25aae1;
-          color: #fff;
-          font-size: 18px;
-          width: 100%;
-          text-align: center;
-          border: 2px solid #d0d0d0;
-          margin: 5px auto;
-          text-transform: uppercase;
-        }
-        .info a:last-of-type {
-          background-color: #d8d8d8;
-          color: #000;
-        }
-        .info {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          width: 90%;
-          margin-top: 5px;
-        }
+
         @media (max-width: 767px) {
         }
         @media (min-width: 768px) {
