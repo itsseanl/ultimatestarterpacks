@@ -5,17 +5,25 @@ import { FaInstagram, FaFacebookSquare } from "react-icons/fa";
 import Head from "next/head";
 // import Head from "next/head";
 
-const Header = () => {
+const Header = ({ metaTitle, metaDescription }) => {
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{metaTitle}</title>
+        <meta name="description" content={metaDescription} />
       </Head>
       <header>
         <div className="top">
-          <FaInstagram />
-          <img src="/usplogo.png" />
-          <FaFacebookSquare />
+          <a href="https://instagram.com/u.starterpacks">
+            <FaInstagram />
+          </a>
+          <a href="/">
+            <img src="/usplogo.png" />
+          </a>
+          <a href="https://www.facebook.com/ultimatestarterpacks/">
+            <FaFacebookSquare />
+          </a>
         </div>
         <div className="bottom">
           <p>We research the top recommended products so you don't have to!</p>
