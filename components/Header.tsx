@@ -78,6 +78,12 @@ const Header = ({ metaTitle, metaDescription }) => {
           padding: 15px;
           text-align: center;
         }
+        .bottom p {
+          width: 90%;
+          left: 0;
+          right: 0;
+          margin: auto;
+        }
         img {
           max-height: 100px;
           width: auto;
