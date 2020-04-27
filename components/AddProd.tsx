@@ -8,15 +8,15 @@ const AddProd = ({ product, index, handleAddProd }) => {
 	const [img, setImg] = useState(null);
 	const [link, setLink] = useState(null);
 
+	//call parent function to add product to pack data
 	const addToPack = () => {
 		console.log(index);
 		console.log(title);
 		handleAddProd(index, title, body, price, img, link);
 	};
 
+	//get image file and upload
 	const handleImage = async (theImg) => {
-		// imgPath = imgPath.replace("C:\\fakepath\\", "");
-
 		var reader = new FileReader();
 		var dataURL;
 		reader.onload = async function (e) {
@@ -33,10 +33,8 @@ const AddProd = ({ product, index, handleAddProd }) => {
 			}
 		};
 
-		reader.readAsDataURL(theImg);
+		reader.readAsArrayBuffer(theImg);
 	};
-
-	console.log(img);
 
 	return (
 		<>
@@ -54,18 +52,42 @@ const AddProd = ({ product, index, handleAddProd }) => {
 				type="number"
 				placeholder="price"
 			/>
-			<input
-				onChange={(e) => handleImage(e.target.files[0])}
-				type="file"
-				name="uploaded_img"
-				placeholder="Upload File"
-			/>
+			<div className="img">
+				<input
+					onChange={(e) => handleImage(e.target.files[0])}
+					type="file"
+					name="uploaded_img"
+					placeholder="Upload File"
+				/>
+				<img src={img} />
+			</div>
 			<input
 				onKeyUp={(e) => setLink(e.currentTarget.value)}
 				type="text"
 				placeholder="amazon link"
 			/>
 			<input type="submit" className="btn" onClick={addToPack} />
+			<style jsx>{`
+				img {
+					height: 100px;
+					width: 100px;
+					object-fit: cover;
+				}
+				input,
+				textarea {
+					width: 100%;
+					height: 50px;
+					margin: 15px auto;
+				}
+				.img {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+				.img input {
+					width: 70%;
+				}
+			`}</style>
 		</>
 	);
 };
