@@ -9,7 +9,8 @@ const AddProd = ({ product, index, handleAddProd }) => {
 	const [link, setLink] = useState(null);
 
 	//call parent function to add product to pack data
-	const addToPack = () => {
+	const addToPack = (e) => {
+		e.preventDefault();
 		console.log(index);
 		console.log(title);
 		handleAddProd(index, title, body, price, img, link);
@@ -21,19 +22,33 @@ const AddProd = ({ product, index, handleAddProd }) => {
 		var dataURL;
 		reader.onload = async function (e) {
 			dataURL = reader.result;
-			try {
-				const res = await fetch("/api/admin", {
-					method: "POST",
-					body: dataURL,
-				});
-				const json = await res.json();
-				setImg(json.response);
-			} catch (error) {
-				console.log(error);
-			}
+			setImg(dataURL);
+
+			// try {
+			// 	const res = await fetch("/api/admin", {
+			// 		method: "POST",
+			// 		body: dataURL,
+			// 	})
+			// 		.then((res) => res.blob())
+			// 		.then((image) => {
+			// 			var reader2 = new FileReader();
+			// 			var asText;
+			// 			reader2.onload = async function (e) {
+			// 				asText = reader2.result;
+			// 				console.log(asText);
+
+			// 				//.replace("data:image/jpeg;base64,", "");
+			// 				setImgLink(asText);
+			// 			};
+			// 			reader2.readAsDataURL(image);
+			// 			// outside = URL.createObjectURL(image);
+			// 		});
+			// } catch (error) {
+			// 	console.log(error);
+			// }
 		};
 
-		reader.readAsArrayBuffer(theImg);
+		reader.readAsDataURL(theImg);
 	};
 
 	return (
