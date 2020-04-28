@@ -28,7 +28,11 @@ const Pack = ({ data }) => {
 	return (
 		<>
 			<div className="pack" data-cat={pack.category}>
-				{pack.images ? <img src={"." + pack.images[0]} /> : null}
+				{pack.images ? (
+					<img src={"." + pack.images[0]} />
+				) : (
+					<img src={pack.image} />
+				)}
 				<div className="info">
 					<div className="title">
 						<div className="left">

@@ -23,36 +23,13 @@ const AddProd = ({ product, index, handleAddProd }) => {
 		reader.onload = async function (e) {
 			dataURL = reader.result;
 			setImg(dataURL);
-
-			// try {
-			// 	const res = await fetch("/api/admin", {
-			// 		method: "POST",
-			// 		body: dataURL,
-			// 	})
-			// 		.then((res) => res.blob())
-			// 		.then((image) => {
-			// 			var reader2 = new FileReader();
-			// 			var asText;
-			// 			reader2.onload = async function (e) {
-			// 				asText = reader2.result;
-			// 				console.log(asText);
-
-			// 				//.replace("data:image/jpeg;base64,", "");
-			// 				setImgLink(asText);
-			// 			};
-			// 			reader2.readAsDataURL(image);
-			// 			// outside = URL.createObjectURL(image);
-			// 		});
-			// } catch (error) {
-			// 	console.log(error);
-			// }
 		};
-
 		reader.readAsDataURL(theImg);
 	};
 
 	return (
 		<>
+			<h2>Products</h2>
 			<input
 				onKeyUp={(e) => setTitle(e.currentTarget.value)}
 				type="text"
@@ -67,14 +44,17 @@ const AddProd = ({ product, index, handleAddProd }) => {
 				type="number"
 				placeholder="price"
 			/>
-			<div className="img">
+			<div className="image">
+				<img src={img} />
+
 				<input
 					onChange={(e) => handleImage(e.target.files[0])}
 					type="file"
 					name="uploaded_img"
 					placeholder="Upload File"
+					id={`image${index}`}
 				/>
-				<img src={img} />
+				<label htmlFor={`image${index}`}>Upload Image</label>
 			</div>
 			<input
 				onKeyUp={(e) => setLink(e.currentTarget.value)}
@@ -94,6 +74,18 @@ const AddProd = ({ product, index, handleAddProd }) => {
 					height: 50px;
 					margin: 15px auto;
 				}
+				input,
+				textarea,
+				.images input {
+					width: 90%;
+					margin: 15px;
+					height: 50px;
+					background: #ebebeb;
+					outline: none;
+					border: none;
+					font-size: 18px;
+					padding: 5px;
+				}
 				.img {
 					display: flex;
 					justify-content: center;
@@ -101,6 +93,41 @@ const AddProd = ({ product, index, handleAddProd }) => {
 				}
 				.img input {
 					width: 70%;
+				}
+				input[type="file"] {
+					opacity: 0;
+					position: absolute;
+					pointer-events: none;
+					// alternative to pointer-events, compatible with all browsers, just make it impossible to find
+					width: 1px;
+					height: 1px;
+				}
+				input[type="file"] + label {
+					// your styles here
+					background: #25aae1;
+					color: #fff;
+					height: 50px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					padding: 5px;
+					font-family: "libre", sans-serif;
+					float: right;
+				}
+				input[type="submit"] {
+					background: #2faae1;
+					color: #fff;
+				}
+				.image {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					width: 90%;
+				}
+				.image img {
+					box-shadow: 0px 7px 8px 2px rgba(0, 0, 0, 0.1);
+					width: 100px;
+					height: 100px;
 				}
 			`}</style>
 		</>

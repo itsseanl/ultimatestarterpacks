@@ -16,6 +16,10 @@ const Packs = ({ data }) => {
 	const cookingSearch = useRef(null);
 	const noveltySearch = useRef(null);
 
+	// useEffect(() => {
+	// 	console.log(shown);
+	// }, [setSearch]);
+
 	useEffect(() => {
 		if (search == null || search == "") {
 			setShown(data);
@@ -52,9 +56,12 @@ const Packs = ({ data }) => {
 		if (elem.current.innerHTML == "All") {
 			setSearch("");
 		} else {
+			setSearch(null);
+
 			setSearch(elem.current.innerHTML);
 		}
 	};
+	console.log(search);
 
 	return (
 		<>
@@ -74,7 +81,7 @@ const Packs = ({ data }) => {
 						onClick={(e) => handleCatClick(lifestyleSearch, e)}
 						ref={lifestyleSearch}
 					>
-						Lifestyle
+						lifestyle
 					</li>
 					<li
 						onClick={(e) => handleCatClick(activitySearch, e)}
@@ -98,7 +105,7 @@ const Packs = ({ data }) => {
 			</div>
 			<div className="custom-wrapper packs">
 				{shown.map((pack, index) => {
-					return <Pack data={pack} />;
+					return <Pack key={pack.title + index} data={pack} />;
 				})}
 			</div>
 			<style jsx>{`
