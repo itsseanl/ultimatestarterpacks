@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from "react";
+import react, { useState, useEffect, useRef } from "react";
 import ProdRepeater from "../../components/ProdRepeater";
 import Header from "../../components/Header";
 const Admin = () => {
@@ -10,7 +10,25 @@ const Admin = () => {
 	const [packTags, setPackTags] = useState("test");
 	const [metaTitle, setMetaTitle] = useState("test");
 	const [metaDescription, setMetaDescription] = useState("test");
+
 	const [img, setImg] = useState(null);
+	const passVal = useRef(null);
+
+	const [checked, setChecked] = useState(false);
+
+	const handleAuth = async (e) => {
+		e.preventDefault();
+
+		const data = passVal.current.value;
+		console.log(data);
+		const res = await fetch("/api/admin/validate", {
+			method: "POST",
+			body: data,
+		});
+		const json = await res.json();
+		console.log(json.response);
+		setChecked(json.response);
+	};
 
 	useEffect(() => {
 		if (numProds >= 0) {
@@ -87,58 +105,66 @@ const Admin = () => {
 	return (
 		<>
 			<Header metaDescription={""} metaTitle={"admin"} />
-			<div className="custom-wrapper">
-				<div className="form">
-					<h2>Add New Pack</h2>
-					<input
-						onKeyUp={(e) => setPackTitle(e.currentTarget.value)}
-						placeholder="Pack Title"
-					></input>
-					<textarea
-						onKeyUp={(e) => setPackBody(e.currentTarget.value)}
-						placeholder="Body"
-					></textarea>
-					<div className="image">
-						<img src={img} />
-
+			{checked ? (
+				<div className="custom-wrapper">
+					<div className="form">
+						<h2>Add New Pack</h2>
 						<input
-							onChange={(e) => handleImage(e.target.files[0])}
-							type="file"
-							name="uploaded_img"
-							placeholder="Upload File"
-							id="Image"
-						/>
-						<label htmlFor={"Image"}>Upload Image</label>
-					</div>
-					<div className="prods">
-						<ProdRepeater
-							products={products}
-							handleAddProd={handleAddProd}
-							index={numProds}
-						/>
-						<div className="addProd" onClick={handleAddClick}>
-							+
+							onKeyUp={(e) => setPackTitle(e.currentTarget.value)}
+							placeholder="Pack Title"
+						></input>
+						<textarea
+							onKeyUp={(e) => setPackBody(e.currentTarget.value)}
+							placeholder="Body"
+						></textarea>
+						<div className="image">
+							<img src={img} />
+
+							<input
+								onChange={(e) => handleImage(e.target.files[0])}
+								type="file"
+								name="uploaded_img"
+								placeholder="Upload File"
+								id="Image"
+							/>
+							<label htmlFor={"Image"}>Upload Image</label>
 						</div>
+						<div className="prods">
+							<ProdRepeater
+								products={products}
+								handleAddProd={handleAddProd}
+								index={numProds}
+							/>
+							<div className="addProd" onClick={handleAddClick}>
+								+
+							</div>
+						</div>
+						<input
+							onKeyUp={(e) => setPackCat(e.currentTarget.value)}
+							placeholder="category"
+						></input>
+						<input
+							onKeyUp={(e) => setPackTags(e.currentTarget.value)}
+							placeholder="tags (separate with space)"
+						></input>
+						<input
+							onKeyUp={(e) => setMetaTitle(e.currentTarget.value)}
+							placeholder="meta title"
+						></input>
+						<input
+							onKeyUp={(e) => setMetaDescription(e.currentTarget.value)}
+							placeholder="meta description"
+						></input>
+						<input className="btn" type="submit" onClick={handleSubmitPack} />
 					</div>
-					<input
-						onKeyUp={(e) => setPackCat(e.currentTarget.value)}
-						placeholder="category"
-					></input>
-					<input
-						onKeyUp={(e) => setPackTags(e.currentTarget.value)}
-						placeholder="tags (separate with space)"
-					></input>
-					<input
-						onKeyUp={(e) => setMetaTitle(e.currentTarget.value)}
-						placeholder="meta title"
-					></input>
-					<input
-						onKeyUp={(e) => setMetaDescription(e.currentTarget.value)}
-						placeholder="meta description"
-					></input>
-					<input className="btn" type="submit" onClick={handleSubmitPack} />
 				</div>
-			</div>
+			) : (
+				<>
+					<input ref={passVal} type="password" placeholder="enter password" />
+					<input type="submit" onClick={handleAuth} />
+				</>
+			)}
+
 			<style jsx>{`
 				* {
 					box-sizing: border-box;

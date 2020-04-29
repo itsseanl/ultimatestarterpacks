@@ -56,8 +56,6 @@ const Packs = ({ data }) => {
 		if (elem.current.innerHTML == "All") {
 			setSearch("");
 		} else {
-			setSearch(null);
-
 			setSearch(elem.current.innerHTML);
 		}
 	};

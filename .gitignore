@@ -1,5 +1,8 @@
 .now
+
+# .env files
 .env
+admin.env
 
 .next 
 
