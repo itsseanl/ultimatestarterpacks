@@ -24,6 +24,25 @@ function MyApp({ Component, pageProps }) {
 				></iframe>
 			</noscript>
 			<Component {...pageProps} />
+			<style jsx>{`
+				:global(*) {
+					box-sizing: border-box;
+					font-family: "libre";
+				}
+				:global(.custom-wrapper) {
+					width: 90%;
+					max-width: 1300px;
+					left: 0;
+					right: 0;
+					margin: auto;
+				}
+				:global(@font-face) {
+					font-family: "libre";
+					src: url(./fonts/Libre_Baskerville/LibreBaskerville-Bold.ttf);
+					src: url(./fonts/Libre_Baskerville/LibreBaskerville-Italic.ttf);
+					src: url(./fonts/Libre_Baskerville/LibreBaskerville-Regular.ttf);
+				}
+			`}</style>
 		</>
 	);
 }

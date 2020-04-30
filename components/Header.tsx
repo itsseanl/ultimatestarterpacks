@@ -25,7 +25,7 @@ const Header = ({ metaTitle, metaDescription }) => {
 						<FaFacebookSquare />
 					</a>
 				</div>
-				{metaTitle != "admin" && (
+				{metaTitle == "Find your Passion | Home | ultimatestarterpacks.com" && (
 					<div className="bottom">
 						<p>
 							We research the top recommended products so you don't have to!
@@ -53,9 +53,12 @@ const Header = ({ metaTitle, metaDescription }) => {
 				}
 				:global(@font-face) {
 					font-family: "libre";
-					src: url(./fonts/Libre_Baskerville/LibreBaskerville-Bold.ttf);
-					src: url(./fonts/Libre_Baskerville/LibreBaskerville-Italic.ttf);
-					src: url(./fonts/Libre_Baskerville/LibreBaskerville-Regular.ttf);
+					src: url(/fonts/Libre_Baskerville/LibreBaskerville-Italic.ttf);
+					src: url(/fonts/Libre_Baskerville/LibreBaskerville-Regular.ttf);
+				}
+				:global(@font-face) {
+					font-family: "libreBold";
+					src: url(/fonts/Libre_Baskerville/LibreBaskerville-Bold.ttf);
 				}
 				:global(h1, h2, h3, h4, h5, h6) {
 					font-family: "libre", sans-serif;

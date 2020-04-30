@@ -15,7 +15,6 @@ const Packs = ({ data }) => {
 	const activitySearch = useRef(null);
 	const cookingSearch = useRef(null);
 	const noveltySearch = useRef(null);
-
 	// useEffect(() => {
 	// 	console.log(shown);
 	// }, [setSearch]);

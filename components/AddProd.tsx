@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useState, useRef } from "react";
 import fetch from "isomorphic-unfetch";
 
 const AddProd = ({ product, index, handleAddProd }) => {
@@ -8,12 +8,15 @@ const AddProd = ({ product, index, handleAddProd }) => {
 	const [img, setImg] = useState(null);
 	const [link, setLink] = useState(null);
 
+	const prod = useRef(null);
+
 	//call parent function to add product to pack data
 	const addToPack = (e) => {
 		e.preventDefault();
 		console.log(index);
 		console.log(title);
 		handleAddProd(index, title, body, price, img, link);
+		prod.current.classList = "prodwrap hidden";
 	};
 
 	//get image file and upload
@@ -29,40 +32,49 @@ const AddProd = ({ product, index, handleAddProd }) => {
 
 	return (
 		<>
-			<h2>Products</h2>
-			<input
-				onKeyUp={(e) => setTitle(e.currentTarget.value)}
-				type="text"
-				placeholder="Product Title"
-			/>
-			<textarea
-				onKeyUp={(e) => setBody(e.currentTarget.value)}
-				placeholder="product body"
-			/>
-			<input
-				onKeyUp={(e) => setPrice(e.currentTarget.value)}
-				type="number"
-				placeholder="price"
-			/>
-			<div className="image">
-				<img src={img} />
-
+			<div className="prodwrap" ref={prod}>
+				<h2>Products</h2>
 				<input
-					onChange={(e) => handleImage(e.target.files[0])}
-					type="file"
-					name="uploaded_img"
-					placeholder="Upload File"
-					id={`image${index}`}
+					onKeyUp={(e) => setTitle(e.currentTarget.value)}
+					type="text"
+					placeholder="Product Title"
 				/>
-				<label htmlFor={`image${index}`}>Upload Image</label>
+				<textarea
+					onKeyUp={(e) => setBody(e.currentTarget.value)}
+					placeholder="product body"
+				/>
+				<input
+					onKeyUp={(e) => setPrice(e.currentTarget.value)}
+					type="number"
+					placeholder="price"
+				/>
+				<div className="image">
+					<img src={img} />
+
+					<input
+						onChange={(e) => handleImage(e.target.files[0])}
+						type="file"
+						name="uploaded_img"
+						placeholder="Upload File"
+						id={`image${index}`}
+					/>
+					<label htmlFor={`image${index}`}>Upload Image</label>
+				</div>
+				<input
+					onKeyUp={(e) => setLink(e.currentTarget.value)}
+					type="text"
+					placeholder="amazon link"
+				/>
+				<input type="submit" className="btn" onClick={addToPack} />
 			</div>
-			<input
-				onKeyUp={(e) => setLink(e.currentTarget.value)}
-				type="text"
-				placeholder="amazon link"
-			/>
-			<input type="submit" className="btn" onClick={addToPack} />
 			<style jsx>{`
+				.prodwrap {
+					width: 100%;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+				}
 				img {
 					height: 100px;
 					width: 100px;

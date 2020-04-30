@@ -14,7 +14,7 @@ const Admin = () => {
 	const [img, setImg] = useState(null);
 	const passVal = useRef(null);
 
-	const [checked, setChecked] = useState(false);
+	const [checked, setChecked] = useState(true);
 
 	const handleAuth = async (e) => {
 		e.preventDefault();

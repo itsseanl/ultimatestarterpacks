@@ -83,8 +83,8 @@ const Pack = ({ data }) => {
 					align-items: center;
 					margin: 30px auto;
 					padding: 30px 10px;
-					box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.3);
-					border-radius: 25px;
+					box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.2);
+					border-radius: 5px;
 					max-width: 400px;
 					width: 90%;
 					transition: 0.3s all;
