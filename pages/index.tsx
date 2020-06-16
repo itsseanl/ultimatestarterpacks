@@ -9,14 +9,30 @@ import Slider from "../components/Slider";
 const Home = ({ data }) => {
 	const metaTitle = "Find your Passion | Home | ultimatestarterpacks.com";
 	const metaDescription = "this is the meta description.";
-	const images = ["/coffee.jpg", "/dev.jpg", "art.jpg", "exercise.jpg"];
+	const images = [
+		{
+			img: "/coffee.jpg",
+			meta: "person pouring coffee from caraffe",
+		},
+		{
+			img: "/dev.jpg",
+			meta: "developer with laptop, book and phone",
+		},
+		{
+			img: "/art.jpg",
+			meta: "paintbrush and other art supplies on canvas",
+		},
+		{
+			img: "/exercise.jpg",
+			meta: "exercise gloves and equipment",
+		},
+	];
 	return (
 		<>
 			<div className="main">
 				<Header metaTitle={metaTitle} metaDescription={metaDescription} />
 				<Slider images={images} />
 				<Packs data={data} />
-				<p>hello!</p>
 			</div>
 			<style jsx>{`
 				.main {

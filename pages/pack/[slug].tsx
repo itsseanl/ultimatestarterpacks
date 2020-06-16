@@ -1,5 +1,5 @@
 import react, { useRef, useState } from "react";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaProductHunt } from "react-icons/fa";
 import { useRouter, Router } from "next/router";
 import fetch from "isomorphic-unfetch";
 import Header from "../../components/Header";
@@ -87,10 +87,7 @@ const Pack = ({ data }) => {
 									</span>
 								</div>
 								<div className="right custom-wrapper">
-									<p>{product.body}</p>
-									<a href={product.link} className="btn">
-										View Product
-									</a>
+									<p dangerouslySetInnerHTML={{ __html: product.body }} />
 								</div>
 							</div>
 						);
@@ -153,6 +150,15 @@ const Pack = ({ data }) => {
 				}
 				.postmeta > .custom-wrapper > h2 {
 				}
+				.postmeta > .custom-wrapper > p {
+					font-size: 10px;
+					color: #d0d0d0;
+				}
+				p > .bold {
+					font-size: 16px;
+					font-family: "libreBold";
+					color: #333;
+				}
 				.postmeta > .custom-wrapper > * {
 					margin: 15px;
 				}
@@ -164,7 +170,8 @@ const Pack = ({ data }) => {
 					flex-wrap: wrap;
 				}
 				.left img {
-					width: 100%;
+					width: 90%;
+					margin: 5px auto;
 				}
 				.spaninfo {
 					display: flex;
@@ -173,6 +180,7 @@ const Pack = ({ data }) => {
 					background: #ebebeb;
 					width: 100%;
 					padding: 0px 15px;
+					max-height: 90px;
 				}
 				.spaninfo > .info > * {
 					padding: 15px;
@@ -196,6 +204,13 @@ const Pack = ({ data }) => {
 					box-shadow: 0px 1px 4px 2px rgba(0, 0, 0, 0.1);
 					padding: 15px;
 				}
+				.postbody > p {
+					text-align: Center;
+					line-height: 24px;
+					font-size: 18px;
+					font-family: "ubuntu", sans-serif;
+					margin: 50px auto;
+				}
 				.postbody,
 				.right {
 					display: flex;
@@ -211,15 +226,28 @@ const Pack = ({ data }) => {
 						left: 0;
 						right: 0;
 						margin: auto;
-						padding: 15px;
+						height: 500px;
+						line-height: 24px;
+						border-bottom: 5px solid #ebebeb;
+						overflow: hidden;
+					}
+
+					.product:nth-child(odd) {
+						flex-direction: row-reverse;
 					}
 					.left {
+						flex: 1 1 auto;
+						align-items: flex-end;
+					}
+					.left img {
+						max-height: 400px;
 					}
 					.right {
 						justify-content: flex-start;
 						align-items: flex-start;
 						text-align: left;
-						padding: 15px;
+						padding: 50px;
+						font-family: "Open Sans", sans-serif;
 					}
 				}
 			`}</style>

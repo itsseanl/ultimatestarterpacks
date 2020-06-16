@@ -15,9 +15,8 @@ const Packs = ({ data }) => {
 	const activitySearch = useRef(null);
 	const cookingSearch = useRef(null);
 	const noveltySearch = useRef(null);
-	// useEffect(() => {
-	// 	console.log(shown);
-	// }, [setSearch]);
+	
+	const packsWrap = useRef(null);
 
 	useEffect(() => {
 		if (search == null || search == "") {
@@ -100,7 +99,7 @@ const Packs = ({ data }) => {
 					</li>
 				</ul>
 			</div>
-			<div className="custom-wrapper packs">
+			<div className="custom-wrapper packs" ref={packsWrap}>
 				{shown.map((pack, index) => {
 					return <Pack key={pack.title + index} data={pack} />;
 				})}

@@ -39,7 +39,6 @@ const Pack = ({ data }) => {
 							<h2>{pack.title}</h2>
 						</div>
 						<div className="right">
-							{/* <p ref={likeRefs[index]}>{pack.likes}</p> */}
 							<p ref={likeCount}>{pack.likes}</p>
 
 							<div

@@ -28,7 +28,8 @@ const Header = ({ metaTitle, metaDescription }) => {
 				{metaTitle == "Find your Passion | Home | ultimatestarterpacks.com" && (
 					<div className="bottom">
 						<p>
-							We research the top recommended products so you don't have to!
+							Tips, tricks and products for every activity! We do the research
+							so you don't have to.
 						</p>
 					</div>
 				)}
@@ -59,6 +60,10 @@ const Header = ({ metaTitle, metaDescription }) => {
 				:global(@font-face) {
 					font-family: "libreBold";
 					src: url(/fonts/Libre_Baskerville/LibreBaskerville-Bold.ttf);
+				}
+				:global(@font-face) {
+					font-family: "ubuntu";
+					src: url(/fonts/Ubuntu/Ubuntu-Regular.ttf);
 				}
 				:global(h1, h2, h3, h4, h5, h6) {
 					font-family: "libre", sans-serif;
